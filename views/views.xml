@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id='tasktodo_action_window' model='ir.actions.act_window'>
+        <field name='name'>Listado de tareas</field>
+        <field name='res_model'>tasktodo.tasktodo</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+    <menuitem name='Tareas' id='tasktodo_menu_root'/>
+    <menuitem name="Manu 1" id="tasktodo_menu_1" parent="tasktodo_menu_root" action="tasktodo_action_window"/>
+
+
+    <!-- Tree(list) View -->
+    <record id='tasktodo.list' model='ir.ui.view'>
+        <field name='name'>tasktodo list</field>
+        <field name='model'>tasktodo.tasktodo</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='value'/>
+                <field name='name'/>
+                <field name='value2'/>
+                <field name="cost_price"/>
+                <field name="precio"/>
+                <field name="markup"/>
+                <field name="vendor_ids" widget="many2many_tags"/>
+                <field name="date_release"/>
+                <field name="age_days"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tasktodo_view_form" model="ir.ui.view">
+        <field name="name">tasktodo Form</field>
+        <field name="model">tasktodo.tasktodo</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="value" />
+                        <field name="name"/>
+                        <field name="value2"/>
+                        <field name="cost_price"/>
+                        <field name="precio"/>
+                        <field name="currency_id"/>
+                        <field name="markup"/>
+                    </group>
+                    <group>
+                        <field name="vendor_ids" widget="many2many_tags"/>
+                        <field name="date_release"/>
+                        <field name="age_days"/>
+                        <field name="nota1"/>
+                        <field name="nota2"/>
+                        <field name="nota3"/>
+                        <field name="promedio"/>
+                    </group>
+                    <group>
+                        <field name="notes"/>                        
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+        <!-- Search View -->
+    <record id="library_book_view_search" model="ir.ui.view">
+        <field name="name">Tareas Search</field>
+        <field name="model">tasktodo.tasktodo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="vendor_ids"/>
+                <filter string="Without Vendors" name="without_vendor" domain="[('vendor_ids','=',False)]"/>
+             <!--   <filter string="Without Authors" name="without_author" domain="[('author_ids','=',False)]"/> -->
+            </search>
+        </field>
+    </record>
+
+</odoo>
